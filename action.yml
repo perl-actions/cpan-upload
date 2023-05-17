@@ -1,0 +1,37 @@
+name: "Upload to CPAN"
+description: "Upload file to CPAN"
+branding:
+  icon: "upload"
+  color: "red"
+
+inputs:
+  username:
+    description: "Username to upload to the PAUSE server"
+    required: true
+
+  password:
+    description: "Password to upload to the PAUSE server"
+    required: true
+
+  file:
+    description: "File to upload to PAUSE"
+    required: true
+
+  filename:
+    description: "File name to store file as on PAUSE"
+    required: false
+
+  directory:
+    description: "Directory to store file on PAUSE"
+    required: false
+
+outputs:
+  download-url:
+    description: "URL to download release from"
+
+  metacpan-url:
+    description: "URL to view release on MetaCPAN"
+
+runs:
+  using: "node16"
+  main: "dist/index.js"
