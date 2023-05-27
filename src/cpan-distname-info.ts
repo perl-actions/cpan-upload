@@ -135,35 +135,33 @@ export class CPANUpload {
     this.maturity = dev ? Maturity.Developer : Maturity.Released;
   }
 
-  downloadUrl(mirror?: string): string {
-    if (this.author == null) {
-      throw new Error('downloadUrl not available without an author');
+  uriid(): string {
+    const author = this.author;
+    if (author == null) {
+      throw new Error('not available without an author');
     }
+    const directory = this.directory;
+    const filename = this.filename;
 
+    return `${author.substring(0, 1)}/${author.substring(0, 2)}/${author}/${directory == null ? '' : directory+'/'}${filename}`;
+  }
+
+  downloadUrl(mirror?: string): string {
     mirror ??= this.mirror ?? 'https://www.cpan.org/';
 
-    return [
-      mirror + 'authors/id',
-      this.author.substring(0, 1),
-      this.author.substring(0, 2),
-      this.author,
-      ...(this.directory != null ? [this.directory] : []),
-      this.filename,
-    ].join('/');
+    return `${mirror}authors/id/${this.uriid()}`;
   }
 
   metacpanUrl(): string {
     if (this.author == null) {
-      throw new Error('metacpanUrl not available without an author');
+      throw new Error('not available without an author');
     }
     if (this.release == null) {
       throw new Error(
-        'metacpanUrl not available without an author and release'
+        'not available without a release'
       );
     }
 
-    return ['https://metacpan.org/release', this.author, this.release].join(
-      '/'
-    );
+    return `https://metacpan.org/release/${this.author}/${this.release}`;
   }
 }
