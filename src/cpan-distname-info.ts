@@ -143,7 +143,9 @@ export class CPANUpload {
     const directory = this.directory;
     const filename = this.filename;
 
-    return `${author.substring(0, 1)}/${author.substring(0, 2)}/${author}/${directory == null ? '' : directory+'/'}${filename}`;
+    return `${author.substring(0, 1)}/${author.substring(0, 2)}/${author}/${
+      directory == null ? '' : directory + '/'
+    }${filename}`;
   }
 
   downloadUrl(mirror?: string): string {
@@ -157,9 +159,7 @@ export class CPANUpload {
       throw new Error('not available without an author');
     }
     if (this.release == null) {
-      throw new Error(
-        'not available without a release'
-      );
+      throw new Error('not available without a release');
     }
 
     return `https://metacpan.org/release/${this.author}/${this.release}`;
