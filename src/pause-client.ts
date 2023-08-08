@@ -1,5 +1,5 @@
 import { HttpClient, type HttpClientResponse } from '@actions/http-client';
-import { BasicCredentialHandler } from '@actions/http-client/auth';
+import { BasicCredentialHandler } from '@actions/http-client/lib/auth';
 import FormData from 'form-data';
 import { type OutgoingHttpHeaders } from 'http';
 import { readFile } from 'node:fs/promises';

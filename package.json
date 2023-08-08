@@ -8,8 +8,8 @@
     "build": "tsc",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "jest",
-    "package": "tsc && ncc build lib/main.js"
+    "test": "NODE_OPTIONS='--experimental-vm-modules --no-warnings=ExperimentalWarning' jest",
+    "package": "tsc && ncc build --license licenses.txt",
     "license-check": "license-checker --production --onlyAllow \"Apache-2.0;BSD-2-Clause;BSD-3-Clause;ISC;MIT;CC0-1.0;Unlicense\" --summary"
   },
   "keywords": [],

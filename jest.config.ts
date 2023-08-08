@@ -3,7 +3,6 @@ import { pathsToModuleNameMapper } from 'ts-jest';
 import { compilerOptions } from './tsconfig.json';
 
 const config: Config.InitialOptions = {
-  preset: 'ts-jest/presets/default-esm',
   testEnvironment: 'node',
   verbose: true,
   testMatch: ['**/__tests__/*.test.ts'],
@@ -12,5 +11,17 @@ const config: Config.InitialOptions = {
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: '<rootDir>/',
   }),
+  transform: {
+    "^.+\\.m?tsx?$": [
+      'ts-jest',
+      {
+        useESM: true,
+        tsconfig: {
+          ...compilerOptions,
+          allowImportingTsExtensions: true,
+        },
+      },
+    ],
+  },
 };
 export default config;
