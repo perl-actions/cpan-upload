@@ -2,33 +2,33 @@ import { expect, jest, test, describe } from '@jest/globals';
 
 import * as HttpClient from '@actions/http-client';
 
-import { PAUSEClient } from '~/pause-client';
-
 describe('normal', () => {
   test('downloadUrl', async () => {
     jest.mock('@actions/http-client', () => ({
       ...HttpClient,
-      "HttpClient": jest.fn().mockImplementation(() => ({
-        post: jest.fn(),
-      })),
+      HttpClient: jest.fn().mockImplementation(() => {
+        const resp = {
+          message: {
+            statusCode: 200,
+          },
+          readBody: () => 'Query succeeded',
+        };
+        return {
+          post: jest.fn().mockImplementation(() => Promise.resolve(resp)),
+        };
+      }),
     }));
 
     const { PAUSEClient } = await import('~/pause-client');
 
-    const client = new PAUSEClient('HAARG', 'my-password');
+    const client = new PAUSEClient('PAUSEUSER', 'my-password');
 
-    // client.uploadUrl = 'http://localhost:5555/';
-
-    /*
     const upload = await client.upload({
       file: './README.md',
     });
 
-    console.log(upload);
     expect(upload.downloadUrl()).toBe(
-      'https://www.cpan.org/authors/id/H/HA/HAARG/README.md'
+      'https://www.cpan.org/authors/id/P/PA/PAUSEUSER/README.md'
     );
-    */
-    expect(true).toBe(true);
   });
 });
