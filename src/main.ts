@@ -19,10 +19,12 @@ async function run(): Promise<void> {
   core.setOutput('metacpan-url', upload.metacpanUrl());
 }
 
-void (async (): Promise<void> => {
-  try {
-    await run();
-  } catch (error: any) {
+try {
+  await run();
+} catch (error) {
+  if (error instanceof Error) {
     core.setFailed(error.message);
+  } else {
+    core.setFailed('Unknown error!');
   }
-})();
+}

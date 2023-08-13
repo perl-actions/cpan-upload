@@ -27,10 +27,12 @@ async function getRequestData(
 
 export class PAUSEClient {
   readonly #client: HttpClient;
-  public uploadUrl: string =
-    'https://pause.perl.org/pause/authenquery?ACTION=add_uri';
+  public uploadUrl = 'https://pause.perl.org/pause/authenquery?ACTION=add_uri';
 
-  constructor(readonly username: string, password: string) {
+  constructor(
+    readonly username: string,
+    password: string
+  ) {
     const credentials = new BasicCredentialHandler(username, password);
 
     this.#client = new HttpClient('perl-actions/cpan-upload', [credentials]);

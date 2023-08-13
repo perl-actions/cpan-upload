@@ -12,7 +12,7 @@ const config: Config.InitialOptions = {
     prefix: '<rootDir>/',
   }),
   transform: {
-    "^.+\\.m?tsx?$": [
+    '^.+\\.m?tsx?$': [
       'ts-jest',
       {
         useESM: true,
