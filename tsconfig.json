@@ -6,7 +6,7 @@
     "sourceMap": true,
     "target": "es2019",
     "module": "es2022",
-    "moduleResolution": "node16",
+    "moduleResolution": "bundler",
     "types": ["node", "jest"],
     "strict": true,
     "allowJs": true,
